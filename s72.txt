@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROOTED — A Guide to Flowers &amp; Houseplants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1F2A1D;
+    --paper: #F4F1E8;
+    --leaf: #3E5C3A;
+    --clay: #B4623C;
+    --rose: #C77B86;
+    --dust: #837F6E;
+    --line: #DAD4C0;
+    --card: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .display { font-family: 'Fraunces', serif; font-weight: 600; line-height: 1.02; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  svg { display: block; }
+
+  /* ---------- NAV ---------- */
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 28px 0; border-bottom: 1.5px solid var(--ink); }
+  .nav .logo { font-family: 'Fraunces', serif; font-weight: 600; font-size: 24px; }
+  .nav .logo span { color: var(--clay); font-style: italic; }
+  .nav ul { list-style: none; display: none; gap: 30px; font-weight: 500; font-size: 14px; }
+  @media (min-width: 760px) { .nav ul { display: flex; } }
+  .nav a { color: var(--ink); text-decoration: none; }
+
+  /* ---------- HERO ---------- */
+  .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; padding: 60px 0 70px; align-items: center; }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; padding: 42px 0 46px; } }
+  .hero .kicker { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--leaf); font-weight: 600; margin-bottom: 16px; }
+  .hero h1 { font-size: clamp(38px, 5.6vw, 62px); }
+  .hero h1 em { font-style: italic; color: var(--leaf); }
+  .hero .sub { margin-top: 22px; font-size: 17.5px; color: #45473C; max-width: 48ch; }
+  .hero .tag-row { display: flex; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+  .tag { font-size: 12.5px; font-weight: 600; padding: 7px 14px; border: 1.5px solid var(--leaf); border-radius: 100px; color: var(--leaf); }
+
+  .photo-panel { aspect-ratio: 4/5; border-radius: 12px; overflow: hidden; position: relative; }
+  .photo-panel svg { width: 100%; height: 100%; }
+  .photo-panel .caption { position: absolute; left: 20px; bottom: 18px; color: var(--paper); font-family: 'Fraunces', serif; font-size: 16px; }
+  .photo-panel .caption small { display: block; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; margin-top: 3px; }
+
+  /* ---------- SECTIONS ---------- */
+  .section { padding: 68px 0; }
+  .section.tinted { background: #EBE6D6; }
+  .section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; border-bottom: 1.5px solid var(--ink); padding-bottom: 16px; }
+  .section-head h2 { font-size: clamp(26px, 3.6vw, 38px); }
+  .section-head .count { font-weight: 600; color: var(--dust); font-size: 13.5px; white-space: nowrap; }
+
+  .article-intro { font-size: 19px; color: #333628; margin-bottom: 8px; }
+  .article-intro .drop { float: left; font-family: 'Fraunces', serif; font-style: italic; font-size: 60px; line-height: 0.75; margin: 6px 12px 0 0; color: var(--clay); }
+
+  /* ---------- PLANT TYPE GRID ---------- */
+  .cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+  .cat-card { background: var(--card); border-radius: 10px; overflow: hidden; box-shadow: 0 1px 0 var(--line); }
+  .cat-card .art { aspect-ratio: 1/1; }
+  .cat-card .art svg { width: 100%; height: 100%; }
+  .cat-card .info { padding: 15px 16px 18px; }
+  .cat-card .info h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 16px; }
+  .cat-card .info p { font-size: 13px; color: var(--dust); margin-top: 4px; }
+
+  /* ---------- CARE GRID ---------- */
+  .care-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 860px) { .care-cards { grid-template-columns: 1fr; } }
+  .care-card { background: var(--card); border-radius: 10px; padding: 26px; }
+  .care-card .icon-circle { width: 48px; height: 48px; border-radius: 100px; background: #EDE8D8; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .care-card .icon-circle svg { width: 24px; height: 24px; }
+  .care-card h4 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 18px; margin-bottom: 8px; }
+  .care-card p { font-size: 14.5px; color: #45473C; }
+
+  /* ---------- SEASON ROWS ---------- */
+  .season-row { display: grid; grid-template-columns: 130px 1fr; gap: 22px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+  .season-row:last-child { border-bottom: none; }
+  .season-row .season-label { font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 16px; color: var(--clay); padding-top: 2px; }
+  .season-row p { font-size: 15.5px; color: #333628; max-width: 62ch; }
+
+  /* ---------- LOOKBOOK / ARRANGEMENTS ---------- */
+  .lookbook { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 860px) { .lookbook { grid-template-columns: 1fr 1fr; } }
+  .look-panel { aspect-ratio: 3/4; border-radius: 10px; position: relative; overflow: hidden; }
+  .look-panel svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .look-panel .tag-label { position: absolute; bottom: 14px; left: 14px; right: 14px; color: var(--paper); font-family: 'Fraunces', serif; font-weight: 600; font-size: 14.5px; }
+
+  /* ---------- MISTAKES ---------- */
+  .mistake-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+  @media (max-width: 720px) { .mistake-grid { grid-template-columns: 1fr; } }
+  .mistake { display: flex; gap: 14px; align-items: flex-start; }
+  .mistake .x-badge { width: 28px; height: 28px; border-radius: 100px; background: var(--rose); color: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+  .mistake p { font-size: 15px; color: #333628; }
+  .mistake strong { display: block; margin-bottom: 3px; font-family: 'Fraunces', serif; font-weight: 600; }
+
+  /* ---------- POT SIZE STRIP ---------- */
+  .size-strip { background: var(--leaf); color: var(--paper); border-radius: 14px; padding: 42px 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
+  @media (max-width: 720px) { .size-strip { grid-template-columns: 1fr; } }
+  .size-strip h2 { font-family: 'Fraunces', serif; font-size: clamp(24px, 3.6vw, 32px); margin-bottom: 12px; }
+  .size-strip p { color: #D9E0D4; font-size: 14.5px; max-width: 42ch; }
+  .size-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .size-table th, .size-table td { border: 1px solid #567552; padding: 9px 9px; text-align: center; }
+  .size-table th { background: #2E4A2A; font-weight: 600; font-size: 11.5px; text-transform: uppercase; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .quote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .quote-grid { grid-template-columns: 1fr; } }
+  .quote-card { background: var(--card); border-radius: 10px; padding: 24px; }
+  .quote-card p.q { font-size: 15px; margin-bottom: 14px; font-style: italic; font-family: 'Fraunces', serif; }
+  .quote-card .who { font-weight: 600; font-size: 13px; color: var(--leaf); }
+
+  /* ---------- NEWSLETTER ---------- */
+  .newsletter { border: 1.5px solid var(--ink); border-radius: 14px; padding: 44px 34px; text-align: center; }
+  .newsletter h2 { font-family: 'Fraunces', serif; font-size: clamp(24px, 3.6vw, 34px); margin-bottom: 12px; }
+  .newsletter p { color: #45473C; margin-bottom: 22px; }
+  .newsletter form { display: flex; gap: 10px; max-width: 420px; margin: 0 auto; }
+  .newsletter input { flex: 1; padding: 13px 16px; border: 1.5px solid var(--ink); border-radius: 100px; font-family: 'Inter', sans-serif; font-size: 14px; }
+  .newsletter button { background: var(--leaf); color: var(--paper); border: none; border-radius: 100px; padding: 13px 26px; font-weight: 600; font-size: 14px; cursor: pointer; }
+  @media (max-width: 480px) { .newsletter form { flex-direction: column; } }
+
+  footer { border-top: 1.5px solid var(--ink); padding: 36px 0 48px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; font-size: 13px; color: var(--dust); }
+  footer .logo { font-family: 'Fraunces', serif; font-weight: 600; color: var(--ink); font-size: 17px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav class="nav">
+    <div class="logo">Rooted<span>.</span></div>
+    <ul>
+      <li><a href="#guide">Guide</a></li>
+      <li><a href="#types">Plants</a></li>
+      <li><a href="#care">Care</a></li>
+      <li><a href="#pots">Pots</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <p class="kicker">A gardener's field notes</p>
+      <h1 class="display">Bring something <em>green</em> into the room.</h1>
+      <p class="sub">A complete guide to flowers and houseplants — what to grow where, how often to water without guessing, and which plant actually forgives a busy week.</p>
+      <div class="tag-row">
+        <span class="tag">Indoor &amp; balcony</span>
+        <span class="tag">Care guide inside</span>
+        <span class="tag">Season by season</span>
+      </div>
+    </div>
+    <div class="photo-panel">
+      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#5C7A52"/>
+            <stop offset="1" stop-color="#20301C"/>
+          </linearGradient>
+          <filter id="grain1"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/></filter>
+        </defs>
+        <rect width="400" height="500" fill="url(#g1)"/>
+        <rect width="400" height="500" filter="url(#grain1)"/>
+        <g transform="translate(200 320)">
+          <path d="M0 0 L0 -170" stroke="#3E5C3A" stroke-width="6" stroke-linecap="round"/>
+          <path d="M0 -60 Q-55 -90 -70 -150 Q-15 -130 0 -70 Z" fill="#4C7044"/>
+          <path d="M0 -100 Q55 -125 75 -180 Q20 -165 0 -110 Z" fill="#5C8452"/>
+          <path d="M0 -140 Q-40 -170 -45 -215 Q-5 -195 0 -145 Z" fill="#3E5C3A"/>
+          <ellipse cx="0" cy="15" rx="70" ry="26" fill="#B4623C"/>
+          <rect x="-58" y="-5" width="116" height="60" fill="#9A4F30"/>
+        </g>
+      </svg>
+      <div class="caption">Fiddle-leaf fig<small>Bright, indirect light</small></div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap" id="guide">
+
+  <section class="section">
+    <div class="section-head">
+      <h2 class="display">Where to start</h2>
+      <span class="count">Reading time · 4 min</span>
+    </div>
+    <p class="article-intro"><span class="drop">M</span>ost plants that don't survive their first month weren't a bad choice — they were the wrong plant for the light and attention actually available. Before buying anything, it's worth being honest about the room: how much direct sun a window really gets, how often you realistically remember to water, and whether the plant needs to survive a forgetful week now and then. This guide starts there, then moves through care basics, seasonal shifts, and the mistakes that quietly kill more plants than pests ever do.</p>
+  </section>
+
+  <section class="section tinted" id="types">
+    <div class="section-head">
+      <h2 class="display">Shop by type</h2>
+      <span class="count">04 categories</span>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <div class="art">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="p1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A9A6E"/><stop offset="1" stop-color="#2E4A2A"/></linearGradient></defs>
+            <rect width="100" height="100" fill="url(#p1)"/>
+            <path d="M50 78 L50 40" stroke="#1F2A1D" stroke-width="3"/>
+            <path d="M50 55 Q30 45 25 28 Q45 32 50 50 Z" fill="#1F2A1D" opacity="0.85"/>
+            <path d="M50 45 Q70 35 75 20 Q55 25 50 42 Z" fill="#1F2A1D" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="info"><h3>Indoor Foliage</h3><p>Low to bright light, air-purifying</p></div>
+      </div>
+      <div class="cat-card">
+        <div class="art">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="p2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C77B86"/><stop offset="1" stop-color="#6E3540"/></linearGradient></defs>
+            <rect width="100" height="100" fill="url(#p2)"/>
+            <path d="M50 80 L50 45" stroke="#1F2A1D" stroke-width="3"/>
+            <circle cx="50" cy="35" r="14" fill="#1F2A1D" opacity="0.85"/>
+            <circle cx="38" cy="42" r="9" fill="#1F2A1D" opacity="0.65"/>
+            <circle cx="62" cy="42" r="9" fill="#1F2A1D" opacity="0.65"/>
+          </svg>
+        </div>
+        <div class="info"><h3>Flowering Plants</h3><p>Bright light, seasonal blooms</p></div>
+      </div>
+      <div class="cat-card">
+        <div class="art">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="p3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B4623C"/><stop offset="1" stop-color="#5C3320"/></linearGradient></defs>
+            <rect width="100" height="100" fill="url(#p3)"/>
+            <ellipse cx="50" cy="70" rx="12" ry="22" fill="#1F2A1D" opacity="0.85"/>
+            <ellipse cx="35" cy="60" rx="8" ry="18" fill="#1F2A1D" opacity="0.65"/>
+            <ellipse cx="65" cy="60" rx="8" ry="18" fill="#1F2A1D" opacity="0.65"/>
+          </svg>
+        </div>
+        <div class="info"><h3>Succulents</h3><p>Full sun, minimal watering</p></div>
+      </div>
+      <div class="cat-card">
+        <div class="art">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="p4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8DA97E"/><stop offset="1" stop-color="#3E5C3A"/></linearGradient></defs>
+            <rect width="100" height="100" fill="url(#p4)"/>
+            <path d="M35 80 L35 40 M50 80 L50 32 M65 80 L65 40" stroke="#1F2A1D" stroke-width="3"/>
+            <path d="M35 55 Q25 48 24 36 M50 45 Q40 38 39 26 M65 55 Q75 48 76 36" stroke="#1F2A1D" stroke-width="2.5" fill="none"/>
+          </svg>
+        </div>
+        <div class="info"><h3>Herbs</h3><p>Kitchen window, cut-and-grow</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="care">
+    <div class="section-head">
+      <h2 class="display">The three basics</h2>
+      <span class="count">Get these right first</span>
+    </div>
+    <div class="care-cards">
+      <div class="care-card">
+        <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="#3E5C3A" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
+        <h4>Light</h4>
+        <p>Match the plant to the window, not the room. "Bright indirect" means near a window but out of direct midday sun — a few feet back usually does it.</p>
+      </div>
+      <div class="care-card">
+        <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="#3E5C3A" stroke-width="1.6"><path d="M12 3s7 8 7 13a7 7 0 1 1-14 0c0-5 7-13 7-13z"/></svg></div>
+        <h4>Water</h4>
+        <p>Check the soil with a finger before watering rather than following a fixed schedule — overwatering, not underwatering, kills more houseplants.</p>
+      </div>
+      <div class="care-card">
+        <div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="#3E5C3A" stroke-width="1.6"><path d="M4 20V10a8 8 0 0 1 16 0v10"/><path d="M4 20h16"/></svg></div>
+        <h4>Soil &amp; drainage</h4>
+        <p>A pot without a drainage hole is one of the most common reasons roots rot — water needs somewhere to go once the soil is saturated.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tinted">
+    <div class="section-head">
+      <h2 class="display">Care through the year</h2>
+      <span class="count">Season by season</span>
+    </div>
+    <div class="season-row">
+      <div class="season-label">Spring</div>
+      <p>Growth speeds up after winter — this is the best time to repot, start feeding again, and move plants to a slightly brighter spot if they've been dormant.</p>
+    </div>
+    <div class="season-row">
+      <div class="season-label">Summer</div>
+      <p>Watering needs usually go up with heat, but check the soil rather than assuming — an air-conditioned room can dry out slower than expected.</p>
+    </div>
+    <div class="season-row">
+      <div class="season-label">Monsoon</div>
+      <p>Humidity does a lot of the work for you. Cut back watering frequency and watch for yellowing leaves, which often signal too much moisture rather than too little.</p>
+    </div>
+    <div class="season-row">
+      <div class="season-label">Winter</div>
+      <p>Growth slows, and so should watering. Move plants away from cold windowpanes and stop feeding until new growth appears again in spring.</p>
+    </div>
+  </section>
+
+  <section class="section" id="pots">
+    <div class="section-head">
+      <h2 class="display">A few favourites</h2>
+      <span class="count">03 pairings</span>
+    </div>
+    <div class="lookbook">
+      <div class="look-panel">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="lb1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A9A6E"/><stop offset="1" stop-color="#233318"/></linearGradient><filter id="gnf1"><feTurbulence baseFrequency="0.85" numOctaves="2" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/></filter></defs>
+          <rect width="300" height="400" fill="url(#lb1)"/><rect width="300" height="400" filter="url(#gnf1)"/>
+          <path d="M150 330 L150 190" stroke="#1F2A1D" stroke-width="5"/>
+          <path d="M150 260 Q100 235 90 180 Q140 195 150 250 Z" fill="#1F2A1D" opacity="0.85"/>
+          <ellipse cx="150" cy="345" rx="55" ry="20" fill="#B4623C"/>
+        </svg>
+        <div class="tag-label">Monstera in terracotta</div>
+      </div>
+      <div class="look-panel">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="lb2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C77B86"/><stop offset="1" stop-color="#4A2530"/></linearGradient><filter id="gnf2"><feTurbulence baseFrequency="0.85" numOctaves="2" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/></filter></defs>
+          <rect width="300" height="400" fill="url(#lb2)"/><rect width="300" height="400" filter="url(#gnf2)"/>
+          <path d="M150 330 L150 210" stroke="#1F2A1D" stroke-width="4"/>
+          <circle cx="150" cy="190" r="26" fill="#1F2A1D" opacity="0.85"/>
+          <circle cx="122" cy="205" r="18" fill="#1F2A1D" opacity="0.6"/>
+          <circle cx="178" cy="205" r="18" fill="#1F2A1D" opacity="0.6"/>
+          <ellipse cx="150" cy="345" rx="52" ry="19" fill="#8B877E"/>
+        </svg>
+        <div class="tag-label">Peace lily on the sill</div>
+      </div>
+      <div class="look-panel">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="lb3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B4623C"/><stop offset="1" stop-color="#4A2814"/></linearGradient><filter id="gnf3"><feTurbulence baseFrequency="0.85" numOctaves="2" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/></filter></defs>
+          <rect width="300" height="400" fill="url(#lb3)"/><rect width="300" height="400" filter="url(#gnf3)"/>
+          <ellipse cx="150" cy="270" rx="30" ry="55" fill="#1F2A1D" opacity="0.85"/>
+          <ellipse cx="115" cy="255" rx="20" ry="45" fill="#1F2A1D" opacity="0.6"/>
+          <ellipse cx="185" cy="255" rx="20" ry="45" fill="#1F2A1D" opacity="0.6"/>
+          <ellipse cx="150" cy="345" rx="50" ry="18" fill="#8B877E"/>
+        </svg>
+        <div class="tag-label">Snake plant, low light corner</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tinted">
+    <div class="section-head">
+      <h2 class="display">Common mistakes</h2>
+      <span class="count">Worth avoiding</span>
+    </div>
+    <div class="mistake-grid">
+      <div class="mistake">
+        <div class="x-badge">✕</div>
+        <p><strong>Watering on a fixed schedule</strong>Every room and season changes how fast soil dries out — check with a finger before watering rather than watering "every Sunday" regardless.</p>
+      </div>
+      <div class="mistake">
+        <div class="x-badge">✕</div>
+        <p><strong>No drainage hole</strong>A decorative pot with no way for water to escape traps moisture around the roots, which is one of the fastest ways to cause rot.</p>
+      </div>
+      <div class="mistake">
+        <div class="x-badge">✕</div>
+        <p><strong>Repotting too often</strong>Most plants only need a slightly bigger pot every year or two — constant repotting disturbs roots more than it helps growth.</p>
+      </div>
+      <div class="mistake">
+        <div class="x-badge">✕</div>
+        <p><strong>Ignoring the season</strong>Feeding and heavy watering in winter, when most plants are dormant, does more harm than good — ease off until spring.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="size-strip">
+      <div>
+        <h2 class="display">Choosing the right pot</h2>
+        <p>Go one size up from the nursery pot, not several — too much extra soil holds water longer than the roots can use.</p>
+      </div>
+      <table class="size-table">
+        <tr><th>Plant size</th><th>Small</th><th>Medium</th><th>Large</th></tr>
+        <tr><td>Pot diameter</td><td>10–15cm</td><td>18–25cm</td><td>30cm+</td></tr>
+        <tr><td>Repot every</td><td>12–18 months</td><td>18–24 months</td><td>2–3 years</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="section tinted">
+    <div class="section-head">
+      <h2 class="display">What growers say</h2>
+      <span class="count">Reader notes</span>
+    </div>
+    <div class="quote-grid">
+      <div class="quote-card"><p class="q">"Finally understood why my last three plants died — I was watering on a schedule instead of checking the soil."</p><div class="who">— First-time plant owner</div></div>
+      <div class="quote-card"><p class="q">"The seasonal section explained why everything looked sad in winter. Stopped worrying so much once I knew it was normal."</p><div class="who">— Balcony gardener</div></div>
+      <div class="quote-card"><p class="q">"Repotted with the right size pot this time and the difference in growth by spring was obvious."</p><div class="who">— Indoor plant collector</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="newsletter">
+      <h2 class="display">Grow with us</h2>
+      <p>Seasonal care notes and new plant guides, sent when there's something worth reading.</p>
+      <form onsubmit="event.preventDefault();">
+        <input type="email" placeholder="you@email.com" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">Rooted.</div>
+    <div>A field guide to flowers and houseplants.</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
